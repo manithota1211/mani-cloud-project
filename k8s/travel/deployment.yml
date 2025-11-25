@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: travel-deployment 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mani
+  template:
+    metadata:
+      labels:
+        app: mani
+    spec:
+      containers:
+        - name: travel-container
+          image: manikanta1432/travel-booking-image:v1.2.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4000
+          env:
+            - name: MONGODB_URI
+              value: "mongodb://mongo-svc:27017/travelEas"
+
+--- 
+
